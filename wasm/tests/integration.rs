@@ -8,9 +8,9 @@ use js_sys_util::create_string;
 use wasm_bindgen::JsValue;
 use wasm_bindgen_test::wasm_bindgen_test;
 
-use rbuf::deserialize;
-use rbuf::serialize;
-use rbuf::Value;
+use safeson::deserialize;
+use safeson::serialize;
+use safeson::Value;
 
 fn v(v: Value) {
     let v: JsValue = v.into();
