@@ -1,8 +1,24 @@
 import { ARRAY, FALSE, NULL, NUMBER, OBJECT, STRING, TRUE } from "./const.ts";
 import { rleDecode } from "./rle.ts";
 
+export function checkBuffer(b: Uint8Array) {
+  if (
+    b.length <= 0 ||
+    ((b[0] == TRUE || b[0] == NULL) && b.length != 1) ||
+    (b[0] == FALSE && (b[1] != 1 || b.length > 2))
+  ) {
+    throw new DeserializationError("Invalid length");
+  } else if (
+    b[0] != NULL && b[0] != TRUE && b[0] != FALSE && b[0] != NUMBER &&
+    b[0] != STRING && b[0] != ARRAY &&
+    b[0] != OBJECT
+  ) {
+    throw new DeserializationError("Invalid type");
+  }
+}
+
 export class DeserializationError extends Error {
-  constructor(message: string, public readonly byteIndex: number) {
+  constructor(message: string) {
     super(message);
   }
 }
@@ -13,6 +29,9 @@ export class Deserializer {
 
   private read(count: number) {
     const b = this._buffer.slice(this.offset, this.offset + count);
+    if (b.length < count) {
+      throw new DeserializationError("No more data remaining");
+    }
     this.offset += b.length;
     return b;
   }
@@ -76,14 +95,12 @@ export class Deserializer {
       case OBJECT:
         return this.readObject();
       default:
-        throw new DeserializationError(
-          `Invalid type: ${type}`,
-          this.offset - 1,
-        );
+        throw new DeserializationError(`Invalid type: ${type}`);
     }
   }
 
   static deserialize(b: Uint8Array) {
+    checkBuffer(b);
     const deserializer = new Deserializer();
     deserializer._buffer = rleDecode(b);
     return deserializer.readValue();
