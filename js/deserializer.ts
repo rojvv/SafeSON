@@ -81,4 +81,10 @@ export class Deserializer {
         );
     }
   }
+
+  static desrialize(b: Uint8Array) {
+    const deserializer = new Deserializer();
+    deserializer._buffer = b;
+    return deserializer.readValue();
+  }
 }
