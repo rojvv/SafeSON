@@ -1,5 +1,6 @@
 use js_sys::JSON;
 use js_sys_util::create_array;
+use js_sys_util::create_boolean;
 use js_sys_util::create_entry;
 use js_sys_util::create_number;
 use js_sys_util::create_object;
@@ -48,9 +49,16 @@ fn ser_deser_string() {
 
 #[wasm_bindgen_test]
 fn ser_deser_array() {
+    v(Value::Array(create_array(&[])));
     v(Value::Array(create_array(&[
         &create_string("Hello, world!"),
         &create_number(-12312342.213),
+        &create_boolean(true),
+        &create_boolean(false),
+        &create_object(&[&create_entry(
+            "k",
+            &create_array(&[&create_number(12345.6789)]),
+        )]),
     ])));
 }
 
