@@ -10,19 +10,19 @@ export class Deserializer {
   private _buffer = new Uint8Array();
   private offset = 0;
 
-  read(count: number) {
+  private read(count: number) {
     const b = this._buffer.slice(this.offset, this.offset + count);
     this.offset += b.length;
     return b;
   }
 
-  readNumber() {
+  private readNumber() {
     const b = this.read(8);
     const v = new DataView(b.buffer);
     return v.getFloat64(0, true);
   }
 
-  readLength() {
+  private readLength() {
     const b = this.read(1)[0];
     if (b <= 254) {
       return b;
@@ -31,12 +31,12 @@ export class Deserializer {
     }
   }
 
-  readString() {
+  private readString() {
     const length = this.readLength();
     return new TextDecoder().decode(this.read(length));
   }
 
-  readArray() {
+  private readArray() {
     const length = this.readLength();
     // deno-lint-ignore no-explicit-any
     const array = new Array<any>();
@@ -46,7 +46,7 @@ export class Deserializer {
     return array;
   }
 
-  readObject() {
+  private readObject() {
     const length = this.readLength();
     // deno-lint-ignore no-explicit-any
     const object = {} as Record<string, any>;
@@ -57,7 +57,7 @@ export class Deserializer {
     return object;
   }
 
-  readValue() {
+  private readValue() {
     const type = this.read(1)[0];
     switch (type) {
       case FALSE:
