@@ -1,4 +1,5 @@
 import { ARRAY, FALSE, NULL, NUMBER, OBJECT, STRING, TRUE } from "./const.ts";
+import { rleDecode } from "./rle.ts";
 
 export class DeserializationError extends Error {
   constructor(message: string, public readonly byteIndex: number) {
@@ -84,7 +85,7 @@ export class Deserializer {
 
   static desrialize(b: Uint8Array) {
     const deserializer = new Deserializer();
-    deserializer._buffer = b;
+    deserializer._buffer = rleDecode(b);
     return deserializer.readValue();
   }
 }

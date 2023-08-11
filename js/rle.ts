@@ -1,4 +1,4 @@
-export function rleEncode(s: Uint8Array) {
+export function rleEncode(s: Iterable<number>) {
   const r = new Array<number>();
   let n = 0;
 

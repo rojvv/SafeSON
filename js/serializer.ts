@@ -1,4 +1,5 @@
 import { ARRAY, FALSE, NULL, NUMBER, OBJECT, STRING, TRUE } from "./const.ts";
+import { rleEncode } from "./rle.ts";
 
 export class Serializer {
   private _buffer = new Array<number>();
@@ -93,6 +94,6 @@ export class Serializer {
   static serialize(value: any) {
     const serializer = new Serializer();
     serializer.writeValue(value);
-    return serializer._buffer;
+    return rleEncode(serializer._buffer);
   }
 }
