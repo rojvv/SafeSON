@@ -84,8 +84,8 @@ impl Deserializer {
     fn read_value(&mut self) -> Result<JsValue, ()> {
         let r#type = self.read(1)[0];
         match r#type {
-            TRUE => Ok(JsValue::TRUE),
             FALSE => Ok(JsValue::FALSE),
+            TRUE => Ok(JsValue::TRUE),
             NULL => Ok(JsValue::NULL),
             NUMBER => Ok(self.read_number().into()),
             STRING => Ok(self.read_string().into()),
