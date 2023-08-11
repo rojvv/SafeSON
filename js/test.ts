@@ -6,7 +6,7 @@ import { Deserializer } from "./deserializer.ts";
 function v(v: any) {
   const expected = JSON.stringify(v);
   // deno-fmt-ignore
-  const actual = JSON.stringify(Deserializer.desrialize(Serializer.serialize(v)));
+  const actual = JSON.stringify(Deserializer.deserialize(Serializer.serialize(v)));
   assertEquals(actual, expected);
 }
 

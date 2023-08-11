@@ -83,7 +83,7 @@ export class Deserializer {
     }
   }
 
-  static desrialize(b: Uint8Array) {
+  static deserialize(b: Uint8Array) {
     const deserializer = new Deserializer();
     deserializer._buffer = rleDecode(b);
     return deserializer.readValue();
