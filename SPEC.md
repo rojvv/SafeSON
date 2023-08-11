@@ -10,7 +10,7 @@
     - [Entry](#entry)
     - [Object](#object)
     - [Value](#value)
-  - [Serializtaion](#serializtaion)
+  - [Serialization](#serialization)
     - [1. Serializing the Values](#1-serializing-the-values)
       - [Booleans](#booleans)
       - [Nulls](#nulls)
@@ -85,7 +85,7 @@ A Value is one of these:
 - The Type ID for ARRAY, followed by an [Array](#array).
 - The Type ID for OBJECT, followed by an [Object](#object).
 
-## Serializtaion
+## Serialization
 
 ### 1. Serializing the Values
 
