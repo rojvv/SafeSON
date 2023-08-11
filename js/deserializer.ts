@@ -5,7 +5,7 @@ export function checkBuffer(b: Uint8Array) {
   if (
     b.length <= 0 ||
     ((b[0] == TRUE || b[0] == NULL) && b.length != 1) ||
-    (b[0] == FALSE && (b[1] != 1 || b.length > 2))
+    (b[0] == FALSE && (b.length != 2 || b[1] != 1))
   ) {
     throw new DeserializationError("Invalid length");
   } else if (

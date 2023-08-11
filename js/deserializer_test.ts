@@ -32,7 +32,7 @@ describe("checkBuffer", () => {
     for (let i = 7; i <= 255; i++) {
       assertThrows(() => {
         checkBuffer(new Uint8Array([i]));
-      }, "Invalid length");
+      }, "Invalid type");
     }
   });
 

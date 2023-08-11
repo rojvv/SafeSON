@@ -11,6 +11,8 @@ use wasm_bindgen::prelude::*;
 use serializer::Serializer;
 use wasm_bindgen::throw_str;
 
+type Result<T> = std::result::Result<T, &'static str>;
+
 pub(crate) const FALSE: u8 = 0;
 pub(crate) const TRUE: u8 = 1;
 pub(crate) const NULL: u8 = 2;
@@ -32,7 +34,7 @@ pub enum Value {
 impl TryFrom<JsValue> for Value {
     type Error = ();
 
-    fn try_from(value: JsValue) -> Result<Self, Self::Error> {
+    fn try_from(value: JsValue) -> std::result::Result<Self, Self::Error> {
         if let Some(v) = value.as_bool() {
             Ok(Value::Boolean(v))
         } else if let Some(v) = value.dyn_ref::<JsString>() {
@@ -83,9 +85,8 @@ pub fn serialize(v: JsValue) -> Vec<u8> {
 
 #[wasm_bindgen]
 pub fn deserialize(v: &[u8]) -> JsValue {
-    if let Ok(v) = Deserializer::deserialize(v) {
-        v
-    } else {
-        throw_str("")
+    match Deserializer::deserialize(v) {
+        Ok(v) => v,
+        Err(e) => throw_str(e),
     }
 }
