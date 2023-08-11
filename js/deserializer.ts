@@ -47,7 +47,12 @@ export class Deserializer {
     if (b <= 254) {
       return b;
     } else {
-      return this.readNumber();
+      const length = this.readNumber();
+      if (length < 0 || length % 1 != 0) {
+        throw new DeserializationError("Invalid length");
+      } else {
+        return length;
+      }
     }
   }
 
@@ -103,6 +108,10 @@ export class Deserializer {
     checkBuffer(b);
     const deserializer = new Deserializer();
     deserializer._buffer = rleDecode(b);
-    return deserializer.readValue();
+    const v = deserializer.readValue();
+    if (deserializer._buffer.length > deserializer.offset) {
+      throw new DeserializationError("Extra bytes");
+    }
+    return v;
   }
 }
