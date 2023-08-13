@@ -10,6 +10,7 @@ SafeSON (pronounced `/seɪf sʌn/`) is a JSON-compatible serialization format.
 
 - [Wasm](./wasm/)
 - [JavaScript](./js/)
+- [Swift](https://github.com/roj1512/SafeSONSwift)
 
 ## License
 
