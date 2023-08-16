@@ -112,6 +112,7 @@ export class Deserializer {
     if (deserializer._buffer.length > deserializer.offset) {
       throw new DeserializationError("Extra bytes");
     }
-    return v;
+    // deno-lint-ignore no-explicit-any
+    return v as any;
   }
 }
