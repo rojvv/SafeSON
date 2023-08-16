@@ -1,7 +1,6 @@
 # SafeSON
 
-SafeSON (pronounced `/seɪf sʌn/`) is a JSON-compatible binary serialization
-format.
+SafeSON (pronounced `/seɪf sʌn/`) is a JSON-compatible serialization format.
 
 ## Spec
 
@@ -11,6 +10,7 @@ format.
 
 - [Wasm](./wasm/)
 - [JavaScript](./js/)
+- [Swift](https://github.com/roj1512/SafeSONSwift)
 
 ## License
 
