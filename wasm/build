@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+rm -rf pkg/
+wasm-pack build
+mv pkg/*.js pkg/*.ts pkg/*.wasm .
+rm -rf pkg/
+mkdir pkg/
+mv *.js *.ts *.wasm pkg/
