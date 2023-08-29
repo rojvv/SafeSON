@@ -25,7 +25,7 @@ await build({
   },
   packageManager: "pnpm",
   package: {
-    name: "safeson",
+    name: "safeson-js",
     version,
     description: "A JSON-compatible serialization format",
     author: "Roj <ez@roj.im>",
