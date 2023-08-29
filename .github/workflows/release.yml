@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20.x
-          registry-url: "https://registry.npmjs.org"
+          registry-url: https://registry.npmjs.org
 
       - uses: pnpm/action-setup@v2
         with:
@@ -33,6 +33,5 @@ jobs:
           deno run -A dnt.ts ${{ github.ref_name }} js/mod.ts
           cd dist
           npm publish --access public
-
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
