@@ -1,6 +1,12 @@
 import { ARRAY, FALSE, NULL, NUMBER, OBJECT, STRING, TRUE } from "./const.ts";
 import { rleDecode } from "./rle.ts";
 
+export class DeserializationError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
 export function checkBuffer(b: Uint8Array) {
   if (
     b.length <= 0 ||
@@ -14,12 +20,6 @@ export function checkBuffer(b: Uint8Array) {
     b[0] != OBJECT
   ) {
     throw new DeserializationError("Invalid type");
-  }
-}
-
-export class DeserializationError extends Error {
-  constructor(message: string) {
-    super(message);
   }
 }
 
